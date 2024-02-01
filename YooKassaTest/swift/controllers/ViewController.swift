@@ -13,6 +13,9 @@ class ViewController
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        return
+        
         let payment = Payment(
             price: 129.00,
             currency: .rub,
@@ -31,5 +34,12 @@ class ViewController
     }
 
 
+    override func viewDidAppear(_ animated: Bool) {
+        present(
+            WebConfirmationViewController(),
+            animated: true
+        )
+    }
+    
 }
 

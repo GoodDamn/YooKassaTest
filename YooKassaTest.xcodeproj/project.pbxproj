@@ -22,6 +22,7 @@
 		25C66BE92B6A626100F3AEDC /* HttpUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C66BE82B6A626100F3AEDC /* HttpUtils.swift */; };
 		25C66BEC2B6B66D500F3AEDC /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C66BEB2B6B66D500F3AEDC /* Payment.swift */; };
 		25C66BEF2B6B682D00F3AEDC /* PaymentSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C66BEE2B6B682D00F3AEDC /* PaymentSnapshot.swift */; };
+		25C66BF22B6B72AA00F3AEDC /* WebConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C66BF12B6B72AA00F3AEDC /* WebConfirmationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		25C66BE82B6A626100F3AEDC /* HttpUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpUtils.swift; sourceTree = "<group>"; };
 		25C66BEB2B6B66D500F3AEDC /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
 		25C66BEE2B6B682D00F3AEDC /* PaymentSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSnapshot.swift; sourceTree = "<group>"; };
+		25C66BF12B6B72AA00F3AEDC /* WebConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebConfirmationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,9 +153,9 @@
 		25C66BE02B6A500100F3AEDC /* swift */ = {
 			isa = PBXGroup;
 			children = (
+				25C66BF02B6B728E00F3AEDC /* controllers */,
 				25C66BAC2B6A3A5500F3AEDC /* AppDelegate.swift */,
 				25C66BAE2B6A3A5500F3AEDC /* SceneDelegate.swift */,
-				25C66BB02B6A3A5500F3AEDC /* ViewController.swift */,
 				25C66BDC2B6A4F2E00F3AEDC /* payment */,
 			);
 			path = swift;
@@ -191,6 +193,15 @@
 				25C66BDD2B6A4F6A00F3AEDC /* PaymentProcess.swift */,
 			);
 			path = process;
+			sourceTree = "<group>";
+		};
+		25C66BF02B6B728E00F3AEDC /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				25C66BB02B6A3A5500F3AEDC /* ViewController.swift */,
+				25C66BF12B6B72AA00F3AEDC /* WebConfirmationViewController.swift */,
+			);
+			path = controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,6 +339,7 @@
 				25C66BB12B6A3A5500F3AEDC /* ViewController.swift in Sources */,
 				25C66BEF2B6B682D00F3AEDC /* PaymentSnapshot.swift in Sources */,
 				25C66BE32B6A502000F3AEDC /* Currency.swift in Sources */,
+				25C66BF22B6B72AA00F3AEDC /* WebConfirmationViewController.swift in Sources */,
 				25C66BAD2B6A3A5500F3AEDC /* AppDelegate.swift in Sources */,
 				25C66BDE2B6A4F6A00F3AEDC /* PaymentProcess.swift in Sources */,
 				25C66BAF2B6A3A5500F3AEDC /* SceneDelegate.swift in Sources */,
