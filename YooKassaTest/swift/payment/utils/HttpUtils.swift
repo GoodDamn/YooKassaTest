@@ -13,10 +13,10 @@ class HttpUtils {
     ) -> [String : String] {
         let uuid = UUID().uuidString
         
-        print("HttpUtils:","header",uuid)
+        print("HttpUtils:","header",uuid, Keys.AUTH)
         
         return [
-            "Authorization" : "Bearer \(Keys.AUTH)",
+            "Authorization" : "Basic \(Keys.AUTH)",
             "Idempotence-Key" : uuid,
             "Content-Type": "application/json"
         ]
@@ -24,8 +24,8 @@ class HttpUtils {
     
     public static func requestJson(
         to url: URL,
-        header: [String : String],
-        body: [String : Any],
+        header: [String : String]? = nil,
+        body: [String : Any]? = nil,
         method: String,
         completion: @escaping ([String : Any]) -> Void
     ) {
@@ -54,8 +54,8 @@ class HttpUtils {
     
     public static func request(
         to url: URL,
-        header: [String : String],
-        body: Data,
+        header: [String : String]? = nil,
+        body: Data? = nil,
         method: String,
         completion: @escaping ([String : Any]) -> Void
     ) {

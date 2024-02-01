@@ -10,7 +10,7 @@ import UIKit
 class ViewController
     : UIViewController {
 
-    private let mPrice: Float = 129.00
+    private let mPrice: Float = 169.00
     
     private var mPaymentProcess: PaymentProcess? = nil
     
@@ -48,7 +48,10 @@ class ViewController
         
         view.addSubview(btn)
         
-        
+        PaymentProcess
+            .getPaymentInfo {
+                pay in
+            }
     }
 
     @objc private func onPay(
@@ -64,7 +67,7 @@ class ViewController
         let payment = Payment(
             price: mPrice,
             currency: .rub,
-            description: "My Subscription"
+            description: "Подписка на 1 месяц"
         )
         
         mPaymentProcess = PaymentProcess(

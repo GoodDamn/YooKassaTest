@@ -9,6 +9,9 @@ import Foundation
 
 class PaymentProcess {
     
+    
+    // 2d4d97f2-000f-5000-a000-1048c394dca9
+    
     private let mJson: [String : Any]
     
     private var mPaymentSnap: PaymentSnapshot? = nil
@@ -74,6 +77,42 @@ class PaymentProcess {
             
             completion(s.mPaymentSnap!)
         }
+        
+    }
+    
+    
+    public static func getPaymentInfo(
+        completion: @escaping (PaymentSnapshot) -> Void
+    ) {
+        
+        var req = URLRequest(
+            url: Keys.URL_PAYMENTS
+                .appendingPathComponent(
+                    "2d4d97f2-000f-5000-a000-1048c394dca9"
+                )
+        )
+        
+        req.setValue(
+            "Basic \(Keys.AUTH)",
+            forHTTPHeaderField: "Authorization"
+        )
+        req.httpBody = nil
+        
+        URLSession.shared.dataTask(
+            with: req
+        ) { data, resp, error in
+            
+            
+            
+            
+            print("PaymentProcess: pi: ",
+                  data,
+                  resp,
+                  error
+            )
+            
+        }.resume()
+        
         
     }
     

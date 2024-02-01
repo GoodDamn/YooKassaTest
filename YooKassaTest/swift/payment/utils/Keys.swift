@@ -9,7 +9,7 @@ import Foundation
 
 class Keys {
     
-    public static let AUTH = "123456:API_KEY".data(
+    public static let AUTH = "".data(
         using: .utf8
     )!.base64EncodedString()
     
@@ -17,7 +17,7 @@ class Keys {
         string: "https://api.yookassa.ru/v3/payments"
     )!
     
-    public static let URL_STR_RETURN_DOMAIN = "return"
+    public static let URL_STR_RETURN_DOMAIN = "return.com"
     
-    public static let URL_STR_RETURN = "https://\(URL_STR_RETURN_DOMAIN)"
+    public static let URL_STR_RETURN = "http://\(URL_STR_RETURN_DOMAIN)"
 }
