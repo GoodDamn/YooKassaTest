@@ -13,6 +13,10 @@ class PaymentProcess {
     
     private var mPaymentSnap: PaymentSnapshot? = nil
     
+    deinit {
+        print("PaymentProcess: deinit()")
+    }
+    
     init(
         payment: Payment
     ) {
@@ -27,7 +31,7 @@ class PaymentProcess {
                 .withCapture,
             "confirmation": [
                 "type": "redirect",
-                "return_url": "https://www.example.com/return_url"
+                "return_url": Keys.URL_STR_RETURN
             ],
             "description": payment
                 .description
@@ -45,11 +49,17 @@ class PaymentProcess {
             method: "POST"
         ) { [weak self] json in
             guard let s = self else {
+                print("PaymentProcess: requestJson: GC")
                 return
             }
             
+            let confirm = json["confirmation"] as? [String : String]
+            
+            let confirmUrl = confirm?["confirmation_url"] ?? "https://google.com"
+            
             s.mPaymentSnap = PaymentSnapshot(
-                id: json["id"] as? String ?? ""
+                id: json["id"] as? String ?? "",
+                confirmUrl: confirmUrl
             )
             
             print(

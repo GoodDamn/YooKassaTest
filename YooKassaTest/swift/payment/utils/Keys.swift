@@ -16,4 +16,8 @@ class Keys {
     public static let URL_PAYMENTS = URL(
         string: "https://api.yookassa.ru/v3/payments"
     )!
+    
+    public static let URL_STR_RETURN_DOMAIN = "return"
+    
+    public static let URL_STR_RETURN = "https://\(URL_STR_RETURN_DOMAIN)"
 }

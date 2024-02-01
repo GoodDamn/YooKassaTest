@@ -12,7 +12,9 @@ import WebKit
 class WebConfirmationViewController
     : UIViewController {
     
-    var mWeb: WKWebView!
+    var mUrl: URL? = nil
+    
+    private var mWeb: WKWebView!
     
     override func loadView() {
         let config = WKWebViewConfiguration()
@@ -30,12 +32,16 @@ class WebConfirmationViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let url = URL(
-            string: "http://192.168.31.98:8080"
-        )
+        guard let url = mUrl else {
+            navigationController?
+                .popViewController(
+                    animated: true
+                )
+            return
+        }
         
         let req = URLRequest(
-            url: url!
+            url: url
         )
         
         mWeb.load(req)
@@ -69,7 +75,9 @@ extension WebConfirmationViewController
             p
         )
         
-        if p.contains("jsondeep") {
+        if p.contains(
+            Keys.URL_STR_RETURN_DOMAIN
+        ) {
             print(
                 "IT'S PAID"
             )
