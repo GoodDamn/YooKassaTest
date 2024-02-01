@@ -52,35 +52,35 @@ extension WebConfirmationViewController
         _ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
         decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
     ) {
-        if navigationAction.navigationType == .other {
-            
-            guard let redirUrl = navigationAction.request.url else {
-                decisionHandler(.allow)
-                return
-            }
-            
-            let p = redirUrl.path
-            
+        if navigationAction.navigationType != .other {
+            decisionHandler(.allow)
+            return
+        }
+        
+        guard let redirUrl = navigationAction.request.url else {
+            decisionHandler(.allow)
+            return
+        }
+        
+        let p = redirUrl.absoluteString
+        
+        print(
+            "WebView: REDIR_URL:",
+            p
+        )
+        
+        if p.contains("jsondeep") {
             print(
-                "WebView: REDIR_URL:",
-                p
+                "IT'S PAID"
             )
-            
-            if p.count < 4 {
-                decisionHandler(
-                    .allow
-                )
-                return
-            }
-            
             decisionHandler(
                 .cancel
             )
-            
             return
         }
         
         decisionHandler(.allow)
+        
     }
     
 }
