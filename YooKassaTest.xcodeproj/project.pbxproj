@@ -16,10 +16,12 @@
 		25C66BC42B6A3A5700F3AEDC /* YooKassaTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C66BC32B6A3A5700F3AEDC /* YooKassaTestTests.swift */; };
 		25C66BCE2B6A3A5700F3AEDC /* YooKassaTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C66BCD2B6A3A5700F3AEDC /* YooKassaTestUITests.swift */; };
 		25C66BD02B6A3A5700F3AEDC /* YooKassaTestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C66BCF2B6A3A5700F3AEDC /* YooKassaTestUITestsLaunchTests.swift */; };
-		25C66BDE2B6A4F6A00F3AEDC /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C66BDD2B6A4F6A00F3AEDC /* Payment.swift */; };
+		25C66BDE2B6A4F6A00F3AEDC /* PaymentProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C66BDD2B6A4F6A00F3AEDC /* PaymentProcess.swift */; };
 		25C66BE32B6A502000F3AEDC /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C66BE22B6A502000F3AEDC /* Currency.swift */; };
-		25C66BE72B6A50C700F3AEDC /* KeyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C66BE62B6A50C700F3AEDC /* KeyUtils.swift */; };
+		25C66BE72B6A50C700F3AEDC /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C66BE62B6A50C700F3AEDC /* Keys.swift */; };
 		25C66BE92B6A626100F3AEDC /* HttpUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C66BE82B6A626100F3AEDC /* HttpUtils.swift */; };
+		25C66BEC2B6B66D500F3AEDC /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C66BEB2B6B66D500F3AEDC /* Payment.swift */; };
+		25C66BEF2B6B682D00F3AEDC /* PaymentSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C66BEE2B6B682D00F3AEDC /* PaymentSnapshot.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,10 +55,12 @@
 		25C66BC92B6A3A5700F3AEDC /* YooKassaTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YooKassaTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		25C66BCD2B6A3A5700F3AEDC /* YooKassaTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YooKassaTestUITests.swift; sourceTree = "<group>"; };
 		25C66BCF2B6A3A5700F3AEDC /* YooKassaTestUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YooKassaTestUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		25C66BDD2B6A4F6A00F3AEDC /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
+		25C66BDD2B6A4F6A00F3AEDC /* PaymentProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentProcess.swift; sourceTree = "<group>"; };
 		25C66BE22B6A502000F3AEDC /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
-		25C66BE62B6A50C700F3AEDC /* KeyUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyUtils.swift; sourceTree = "<group>"; };
+		25C66BE62B6A50C700F3AEDC /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		25C66BE82B6A626100F3AEDC /* HttpUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpUtils.swift; sourceTree = "<group>"; };
+		25C66BEB2B6B66D500F3AEDC /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
+		25C66BEE2B6B682D00F3AEDC /* PaymentSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSnapshot.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,9 +140,10 @@
 		25C66BDC2B6A4F2E00F3AEDC /* payment */ = {
 			isa = PBXGroup;
 			children = (
+				25C66BED2B6B680E00F3AEDC /* process */,
+				25C66BEA2B6B668B00F3AEDC /* models */,
 				25C66BE42B6A50B700F3AEDC /* utils */,
 				25C66BE12B6A501700F3AEDC /* currency */,
-				25C66BDD2B6A4F6A00F3AEDC /* Payment.swift */,
 			);
 			path = payment;
 			sourceTree = "<group>";
@@ -165,10 +170,27 @@
 		25C66BE42B6A50B700F3AEDC /* utils */ = {
 			isa = PBXGroup;
 			children = (
-				25C66BE62B6A50C700F3AEDC /* KeyUtils.swift */,
+				25C66BE62B6A50C700F3AEDC /* Keys.swift */,
 				25C66BE82B6A626100F3AEDC /* HttpUtils.swift */,
 			);
 			path = utils;
+			sourceTree = "<group>";
+		};
+		25C66BEA2B6B668B00F3AEDC /* models */ = {
+			isa = PBXGroup;
+			children = (
+				25C66BEB2B6B66D500F3AEDC /* Payment.swift */,
+				25C66BEE2B6B682D00F3AEDC /* PaymentSnapshot.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		25C66BED2B6B680E00F3AEDC /* process */ = {
+			isa = PBXGroup;
+			children = (
+				25C66BDD2B6A4F6A00F3AEDC /* PaymentProcess.swift */,
+			);
+			path = process;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,11 +326,13 @@
 			files = (
 				25C66BE92B6A626100F3AEDC /* HttpUtils.swift in Sources */,
 				25C66BB12B6A3A5500F3AEDC /* ViewController.swift in Sources */,
+				25C66BEF2B6B682D00F3AEDC /* PaymentSnapshot.swift in Sources */,
 				25C66BE32B6A502000F3AEDC /* Currency.swift in Sources */,
 				25C66BAD2B6A3A5500F3AEDC /* AppDelegate.swift in Sources */,
-				25C66BDE2B6A4F6A00F3AEDC /* Payment.swift in Sources */,
+				25C66BDE2B6A4F6A00F3AEDC /* PaymentProcess.swift in Sources */,
 				25C66BAF2B6A3A5500F3AEDC /* SceneDelegate.swift in Sources */,
-				25C66BE72B6A50C700F3AEDC /* KeyUtils.swift in Sources */,
+				25C66BEC2B6B66D500F3AEDC /* Payment.swift in Sources */,
+				25C66BE72B6A50C700F3AEDC /* Keys.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,9 +7,12 @@
 
 import Foundation
 
-class KeyUtils {
+class Keys {
     
-    public static let API_KEY = "API_KEY"
+    public static let AUTH = "123456:API_KEY".data(
+        using: .utf8
+    )!.base64EncodedString()
+    
     public static let URL_PAYMENTS = URL(
         string: "https://api.yookassa.ru/v3/payments"
     )!

@@ -7,7 +7,8 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController
+    : UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,10 +16,15 @@ class ViewController: UIViewController {
         let payment = Payment(
             price: 129.00,
             currency: .rub,
-            description: "SPOK Subscription"
+            description: "My Subscription"
         )
         
-        payment.start {
+        let paymentProcess = PaymentProcess(
+            payment: payment
+        )
+        
+        paymentProcess.start{ paymentSnap in
+            
             
         }
         

@@ -16,7 +16,7 @@ class HttpUtils {
         print("HttpUtils:","header",uuid)
         
         return [
-            "Authorization" : "Bearer PASTE_API_KEY",
+            "Authorization" : "Bearer \(Keys.AUTH)",
             "Idempotence-Key" : uuid,
             "Content-Type": "application/json"
         ]
@@ -85,8 +85,10 @@ class HttpUtils {
             
             print(
                 "HttpUtils:request_RESPONSE",
-                data
+                data,
+                error
             )
+            
             
             guard let data = data else {
                 print(
