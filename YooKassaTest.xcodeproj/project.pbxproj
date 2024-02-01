@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		257A7F962B6C092000BBEF5E /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7F952B6C092000BBEF5E /* Status.swift */; };
+		257A7F982B6C0AFD00BBEF5E /* PaymentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257A7F972B6C0AFD00BBEF5E /* PaymentInfo.swift */; };
 		25C66BAD2B6A3A5500F3AEDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C66BAC2B6A3A5500F3AEDC /* AppDelegate.swift */; };
 		25C66BAF2B6A3A5500F3AEDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C66BAE2B6A3A5500F3AEDC /* SceneDelegate.swift */; };
 		25C66BB12B6A3A5500F3AEDC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C66BB02B6A3A5500F3AEDC /* ViewController.swift */; };
@@ -43,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		257A7F952B6C092000BBEF5E /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
+		257A7F972B6C0AFD00BBEF5E /* PaymentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInfo.swift; sourceTree = "<group>"; };
 		25C66BA92B6A3A5500F3AEDC /* YooKassaTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YooKassaTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25C66BAC2B6A3A5500F3AEDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		25C66BAE2B6A3A5500F3AEDC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +94,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		257A7F932B6C090400BBEF5E /* enums */ = {
+			isa = PBXGroup;
+			children = (
+				257A7F942B6C090C00BBEF5E /* status */,
+				25C66BE12B6A501700F3AEDC /* currency */,
+			);
+			path = enums;
+			sourceTree = "<group>";
+		};
+		257A7F942B6C090C00BBEF5E /* status */ = {
+			isa = PBXGroup;
+			children = (
+				257A7F952B6C092000BBEF5E /* Status.swift */,
+			);
+			path = status;
+			sourceTree = "<group>";
+		};
 		25C66BA02B6A3A5500F3AEDC = {
 			isa = PBXGroup;
 			children = (
@@ -142,10 +163,10 @@
 		25C66BDC2B6A4F2E00F3AEDC /* payment */ = {
 			isa = PBXGroup;
 			children = (
+				257A7F932B6C090400BBEF5E /* enums */,
 				25C66BED2B6B680E00F3AEDC /* process */,
 				25C66BEA2B6B668B00F3AEDC /* models */,
 				25C66BE42B6A50B700F3AEDC /* utils */,
-				25C66BE12B6A501700F3AEDC /* currency */,
 			);
 			path = payment;
 			sourceTree = "<group>";
@@ -183,6 +204,7 @@
 			children = (
 				25C66BEB2B6B66D500F3AEDC /* Payment.swift */,
 				25C66BEE2B6B682D00F3AEDC /* PaymentSnapshot.swift */,
+				257A7F972B6C0AFD00BBEF5E /* PaymentInfo.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -341,9 +363,11 @@
 				25C66BE32B6A502000F3AEDC /* Currency.swift in Sources */,
 				25C66BF22B6B72AA00F3AEDC /* WebConfirmationViewController.swift in Sources */,
 				25C66BAD2B6A3A5500F3AEDC /* AppDelegate.swift in Sources */,
+				257A7F982B6C0AFD00BBEF5E /* PaymentInfo.swift in Sources */,
 				25C66BDE2B6A4F6A00F3AEDC /* PaymentProcess.swift in Sources */,
 				25C66BAF2B6A3A5500F3AEDC /* SceneDelegate.swift in Sources */,
 				25C66BEC2B6B66D500F3AEDC /* Payment.swift in Sources */,
+				257A7F962B6C092000BBEF5E /* Status.swift in Sources */,
 				25C66BE72B6A50C700F3AEDC /* Keys.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -13,24 +13,14 @@ class WebConfirmationViewController
     : UIViewController {
     
     var mUrl: URL? = nil
+    var mPaymentID: String? = nil
     
     private var mWeb: WKWebView!
-    
-    override func loadView() {
-        let config = WKWebViewConfiguration()
-        mWeb = WKWebView(
-            frame: .zero,
-            configuration: config
-        )
-        
-        mWeb.uiDelegate = self
-        mWeb.navigationDelegate = self
-        view = mWeb
-        
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = .systemPink
         
         guard let url = mUrl else {
             navigationController?
@@ -44,10 +34,89 @@ class WebConfirmationViewController
             url: url
         )
         
+        let config = WKWebViewConfiguration()
+        mWeb = WKWebView(
+            frame: view.frame,
+            configuration: config
+        )
+        
+        mWeb.uiDelegate = self
+        mWeb.navigationDelegate = self
+    
         mWeb.load(req)
+        
+        view.addSubview(mWeb)
+        
+        
+        
+        let b = view.frame.width * 0.15
+        
+        let btnClose = UIButton(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: b,
+                height: b
+            )
+        )
+        
+        btnClose.setTitleColor(
+            .black,
+            for: .normal
+        )
+        
+        btnClose.setTitle(
+            "Back",
+            for: .normal
+        )
+        
+        btnClose.addTarget(
+            self,
+            action: #selector(
+                onClickBtnClose(_:)
+            ),
+            for: .touchUpInside
+        )
+        
+        view.addSubview(btnClose)
         
     }
     
+    
+    @objc private func onClickBtnClose(
+        _ sender: UIButton
+    ) {
+        
+        guard let id = mPaymentID else {
+            return
+        }
+        
+        sender.isEnabled = false
+        
+        PaymentProcess.getPaymentInfo(
+            id: id
+        ) { [weak self] info in
+            
+            print(
+                "WebView:",
+                info
+            )
+            
+            DispatchQueue.ui {
+                if info.status == .success {
+                    self?.navigationController?
+                        .popViewController(
+                            animated: true
+                        )
+                    return
+                }
+                
+                sender.isEnabled = true
+            }
+            
+        }
+        
+    }
 }
 
 
@@ -95,5 +164,22 @@ extension WebConfirmationViewController
 
 extension WebConfirmationViewController
     : WKUIDelegate {
+    
+}
+
+
+extension DispatchQueue {
+    
+    static func ui(
+        execute: @escaping () -> Void
+    ) {
+        
+        DispatchQueue
+            .main
+            .async(
+                execute: execute
+            )
+        
+    }
     
 }

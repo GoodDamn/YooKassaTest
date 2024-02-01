@@ -47,11 +47,6 @@ class ViewController
         )
         
         view.addSubview(btn)
-        
-        PaymentProcess
-            .getPaymentInfo {
-                pay in
-            }
     }
 
     @objc private func onPay(
@@ -75,27 +70,40 @@ class ViewController
         )
         
         mPaymentProcess!.start{ [weak self] paymentSnap in
+            
             DispatchQueue
                 .main
                 .async {
-                    
-                    let vc = WebConfirmationViewController()
-                    
-                    vc.mUrl = URL(
-                        string: paymentSnap
-                            .confirmUrl
-                    )
-                    
-                    self?.present(
-                        vc,
-                        animated: true
-                    )
-                    
                     sender.isEnabled = true
-                    
-                    self?.mPaymentProcess = nil
+                    self?.confirm(
+                        paymentSnap
+                    )
                 }
         }
+    }
+    
+    
+    private func confirm(
+        _ paymentSnap: PaymentSnapshot
+    ) {
+        
+        let vc = WebConfirmationViewController()
+        
+        vc.mPaymentID = paymentSnap.id
+        
+        vc.mUrl = URL(
+            string: paymentSnap
+                .confirmUrl
+        )
+        
+        navigationController?
+            .pushViewController(
+                vc,
+                animated: true
+            )
+        
+        mPaymentProcess = nil
+        
     }
     
 }

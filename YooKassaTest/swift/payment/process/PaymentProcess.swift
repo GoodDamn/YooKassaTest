@@ -82,13 +82,14 @@ class PaymentProcess {
     
     
     public static func getPaymentInfo(
-        completion: @escaping (PaymentSnapshot) -> Void
+        id: String,
+        completion: @escaping (PaymentInfo) -> Void
     ) {
         
         var req = URLRequest(
             url: Keys.URL_PAYMENTS
                 .appendingPathComponent(
-                    "2d4d97f2-000f-5000-a000-1048c394dca9"
+                    id
                 )
         )
         
@@ -102,17 +103,88 @@ class PaymentProcess {
             with: req
         ) { data, resp, error in
             
-            
-            
-            
-            print("PaymentProcess: pi: ",
-                  data,
-                  resp,
-                  error
+            print(
+                "PaymentProcess: RESPONSE:",
+                resp
             )
+            
+            print(
+                "PaymentProcess: ERROR: ",
+                error
+            )
+            
+            print(
+                "PaymentProcess: DATA:",
+                data
+            )
+            
+            guard let data = data else {
+                return
+            }
+            
+            do {
+                
+                let json = try JSONSerialization
+                    .jsonObject(
+                        with: data
+                    ) as! [String : Any]
+                
+                print(
+                    "PaymentProcess: paymentInfo: JSON",
+                    json
+                )
+                
+                
+                completion(
+                    PaymentProcess
+                        .extractPaymentInfo(
+                            json
+                    )
+                )
+                
+                
+            } catch {
+                print(
+                    "PaymentProcess: paymentINFO:JSON",
+                    error
+                )
+            }
             
         }.resume()
         
+        
+    }
+    
+    private static func extractPaymentInfo(
+        _ json: [String : Any]
+    ) -> PaymentInfo {
+        
+        let id = json["id"] as! String
+        
+        let status = Status(
+            rawValue: json["status"] as! String
+        )
+        
+        let paid = json["paid"] as! Bool
+        
+        let amount = json["amount"] as! [String : String]
+        
+        let price = Float(
+            amount["value"]! as String
+        )
+        
+        let currency = Currency(
+            rawValue: amount["currency"]!
+                    as String
+        )
+        
+        return PaymentInfo(
+            id: id,
+            status: status!,
+            paid: paid,
+            price: price!,
+            currency: currency!
+        )
         
     }
     
