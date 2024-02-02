@@ -53,10 +53,6 @@ class ViewController
         _ sender: UIButton
     ) {
         
-        sender.setTitle(
-            "Processing",
-            for: .normal
-        )
         sender.isEnabled = false
         
         let payment = Payment(

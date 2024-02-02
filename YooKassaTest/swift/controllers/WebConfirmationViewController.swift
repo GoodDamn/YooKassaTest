@@ -89,8 +89,6 @@ class WebConfirmationViewController
                     animated: true
                 )
             
-            
-            
         }
         
         let actionCancel = UIAlertAction(
@@ -184,9 +182,7 @@ extension WebConfirmationViewController
 }
 
 extension WebConfirmationViewController
-    : WKUIDelegate {
-    
-}
+    : WKUIDelegate {}
 
 
 extension DispatchQueue {
