@@ -47,28 +47,23 @@ class WebConfirmationViewController
         
         view.addSubview(mWeb)
         
-        
-        
-        let b = view.frame.width * 0.15
+        let b = view.frame.height * 0.1
         
         let btnClose = UIButton(
             frame: CGRect(
                 x: 0,
-                y: 0,
-                width: b,
+                y: view.frame.height - b,
+                width: view.frame.width,
                 height: b
             )
         )
         
-        btnClose.setTitleColor(
-            .black,
+        btnClose.setTitle(
+            "Вернуться",
             for: .normal
         )
         
-        btnClose.setTitle(
-            "Back",
-            for: .normal
-        )
+        btnClose.backgroundColor = .systemBlue
         
         btnClose.addTarget(
             self,
@@ -111,12 +106,79 @@ class WebConfirmationViewController
                     return
                 }
                 
+                
+                self?.alert(
+                    "Выполнение платежа будет прервано"
+                )
+                
                 sender.isEnabled = true
             }
             
         }
         
     }
+    
+    
+    private func alert(
+        _ msg: String
+    ) {
+        
+        let c = UIAlertController(
+            title: "Прервать операцию?",
+            message: msg,
+            preferredStyle: .alert
+        )
+        
+        let payID = self.mPaymentID
+        
+        let action = UIAlertAction(
+            title: "Да",
+            style: .destructive
+        ) { [weak self] action in
+            
+            
+            if let payID = payID {
+                let url = Keys.URL_PAYMENTS
+                .appendingPathComponent(
+                    payID
+                ).appendingPathComponent(
+                    "cancel"
+                )
+                
+                HttpUtils.requestJson(
+                    to: url,
+                    header: HttpUtils
+                        .header(),
+                    body: ["":""],
+                    method: "POST"
+                ) { _ in}
+            }
+            
+            
+            self?.navigationController?
+                .popViewController(
+                    animated: true
+                )
+            
+            
+            
+        }
+        
+        let actionCancel = UIAlertAction(
+            title: "Отмена",
+            style: .cancel
+        )
+        
+        c.addAction(action)
+        c.addAction(actionCancel)
+        
+        present(
+            c,
+            animated: true
+        )
+        
+    }
+    
 }
 
 
@@ -127,7 +189,8 @@ extension WebConfirmationViewController
         _ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
         decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
     ) {
-        if navigationAction.navigationType != .other {
+        if navigationAction
+            .navigationType != .other {
             decisionHandler(.allow)
             return
         }
@@ -143,18 +206,6 @@ extension WebConfirmationViewController
             "WebView: REDIR_URL:",
             p
         )
-        
-        if p.contains(
-            Keys.URL_STR_RETURN_DOMAIN
-        ) {
-            print(
-                "IT'S PAID"
-            )
-            decisionHandler(
-                .cancel
-            )
-            return
-        }
         
         decisionHandler(.allow)
         
