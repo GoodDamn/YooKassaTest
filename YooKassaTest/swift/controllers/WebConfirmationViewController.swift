@@ -17,10 +17,21 @@ class WebConfirmationViewController
     
     private var mWeb: WKWebView!
 
+    override func loadView() {
+        let config = WKWebViewConfiguration()
+        mWeb = WKWebView(
+            frame: .zero,
+            configuration: config
+        )
+        
+        mWeb.uiDelegate = self
+        mWeb.navigationDelegate = self
+        
+        view = mWeb
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .systemPink
         
         guard let url = mUrl else {
             navigationController?
@@ -34,90 +45,8 @@ class WebConfirmationViewController
             url: url
         )
         
-        let config = WKWebViewConfiguration()
-        mWeb = WKWebView(
-            frame: view.frame,
-            configuration: config
-        )
-        
-        mWeb.uiDelegate = self
-        mWeb.navigationDelegate = self
-    
         mWeb.load(req)
-        
-        view.addSubview(mWeb)
-        
-        let b = view.frame.height * 0.1
-        
-        let btnClose = UIButton(
-            frame: CGRect(
-                x: 0,
-                y: view.frame.height - b,
-                width: view.frame.width,
-                height: b
-            )
-        )
-        
-        btnClose.setTitle(
-            "Вернуться",
-            for: .normal
-        )
-        
-        btnClose.backgroundColor = .systemBlue
-        
-        btnClose.addTarget(
-            self,
-            action: #selector(
-                onClickBtnClose(_:)
-            ),
-            for: .touchUpInside
-        )
-        
-        view.addSubview(btnClose)
-        
     }
-    
-    
-    @objc private func onClickBtnClose(
-        _ sender: UIButton
-    ) {
-        
-        guard let id = mPaymentID else {
-            return
-        }
-        
-        sender.isEnabled = false
-        
-        PaymentProcess.getPaymentInfo(
-            id: id
-        ) { [weak self] info in
-            
-            print(
-                "WebView:",
-                info
-            )
-            
-            DispatchQueue.ui {
-                if info.status == .success {
-                    self?.navigationController?
-                        .popViewController(
-                            animated: true
-                        )
-                    return
-                }
-                
-                
-                self?.alert(
-                    "Выполнение платежа будет прервано"
-                )
-                
-                sender.isEnabled = true
-            }
-            
-        }
-        
-    }
-    
     
     private func alert(
         _ msg: String
@@ -189,26 +118,67 @@ extension WebConfirmationViewController
         _ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
         decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
     ) {
-        if navigationAction
-            .navigationType != .other {
+        if navigationAction.navigationType !=
+            .linkActivated {
             decisionHandler(.allow)
             return
         }
         
-        guard let redirUrl = navigationAction.request.url else {
+        guard let redirUrl = navigationAction
+            .request
+            .url?
+            .absoluteString else {
+            
             decisionHandler(.allow)
+            
             return
         }
-        
-        let p = redirUrl.absoluteString
         
         print(
-            "WebView: REDIR_URL:",
-            p
+            "WebView: LINK_URL:",
+            redirUrl
         )
         
-        decisionHandler(.allow)
+        if redirUrl == Keys.DEEP_LINK_SUB {
+            PaymentProcess.getPaymentInfo(
+                id: mPaymentID!
+            ) { [weak self] info in
+                
+                if self == nil {
+                    return
+                }
+                
+                DispatchQueue.ui {
+                    self!.processPayment(
+                        info
+                    )
+                }
+                
+            }
+            
+        }
         
+        decisionHandler(.cancel)
+        
+    }
+    
+    private func processPayment(
+        _ info: PaymentInfo
+    ) {
+        if info.status == .success {
+            // Register sub
+            
+            
+            navigationController?
+                .popViewController(
+                    animated: true
+                )
+            return
+        }
+        
+        alert(
+            "Выполнение платежа будет прервано"
+        )
     }
     
 }

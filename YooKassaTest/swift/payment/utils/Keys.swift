@@ -13,11 +13,11 @@ class Keys {
         using: .utf8
     )!.base64EncodedString()
     
+    public static let DEEP_LINK_SUB =
+        "s://a"
+    
     public static let URL_PAYMENTS = URL(
         string: "https://api.yookassa.ru/v3/payments"
     )!
     
-    public static let URL_STR_RETURN_DOMAIN = "return.com"
-    
-    public static let URL_STR_RETURN = "http://\(URL_STR_RETURN_DOMAIN)"
 }

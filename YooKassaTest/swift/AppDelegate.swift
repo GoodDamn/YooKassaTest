@@ -10,10 +10,23 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var window: UIWindow?
 
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
         // Override point for customization after application launch.
+        
+        
+        window = UIWindow(
+            frame: UIScreen.main.bounds
+        )
+        
+        window?.makeKeyAndVisible()
+        window?.rootViewController = ViewController()
+        
+        
         return true
     }
 
@@ -32,5 +45,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+    func application(
+        _ app: UIApplication,
+        open url: URL,
+        options: [UIApplication.OpenURLOptionsKey : Any] = [:]
+    ) -> Bool {
+        
+        guard let comps = NSURLComponents(
+            url: url,
+            resolvingAgainstBaseURL: true
+        ), let host = comps.host else {
+            print("Invalid URL")
+            return false
+        }
+        
+        print("Components: \(comps)")
+        
+        if host != "sub" {
+            print("Invalid host")
+            return false
+        }
+        
+        print("Handle sub?")
+        
+        let c = ViewController()
+        window?.rootViewController = c
+        
+        return true
+    }
+    
 }
 

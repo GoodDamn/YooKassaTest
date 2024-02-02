@@ -34,7 +34,7 @@ class PaymentProcess {
                 .withCapture,
             "confirmation": [
                 "type": "redirect",
-                "return_url": Keys.URL_STR_RETURN
+                "return_url": Keys.DEEP_LINK_SUB
             ],
             "description": payment
                 .description
